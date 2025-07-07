@@ -1,0 +1,65 @@
+.prompt-wrapper {
+    margin-top: 10px;
+}
+
+.enter-button {
+    position: absolute;
+    bottom: 23px; 
+    left: 100px;    
+    cursor: pointer;
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 1000px;
+    backdrop-filter: blur(50px);
+    z-index: 10;
+}
+
+.arrow {
+    color: red;
+    width: 25px;
+    height: 25px;
+}
+
+.promptInput {
+  display: block;
+  position: relative;
+  font-size: 20px;
+  margin: auto;
+  padding-left: 40px;
+  padding-top: 35px;
+  width: 80vw;
+  max-width: 1300px;
+  height: 450px;
+  background-color: transparent;
+  background-image: linear-gradient(120deg, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.1));
+  backdrop-filter: blur(50px);
+  border-radius: 30px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.promptInput:focus {
+  outline: none;
+}
+
+.promptHolder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 700px;
+  margin-top: 90px;
+}
+
+.header {
+  display: block;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 10px;
+  text-align: center;
+  width: 80%;
+}

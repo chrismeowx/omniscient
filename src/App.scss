@@ -1,0 +1,315 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Jakarta Sans';
+  color: white;
+}
+
+body {
+  background-color: black;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Jakarta Sans';
+  src: url('./assets/fonts/jktSans.ttf') format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jakarta Sans Light';
+  src: url('./assets/fonts/jktSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jakarta Sans Bold';
+  src: url('./assets/fonts/jktSans.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.code-input {
+  font-family: 'Jakarta Sans Light';
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 500px;
+  margin-top: 100px;
+}
+
+.resend-section {
+  margin-top: 100px;
+}
+
+.h1-special {
+  font-family: 'Jakarta Sans Bold';
+  font-size: 70px;
+  font-weight: bold;
+  box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.0);
+}
+
+.verif-code-input {
+  width: 100px;
+  height: 100px;
+  border: none;            
+  border-bottom: 2px solid white; 
+  text-align: center;
+  font-size: 50px;
+  background: transparent;   
+  color: white; 
+}
+
+.verif-code-input:focus {
+  outline: none;
+}
+
+input {
+  color: white;
+  font-family: 'Jakarta Sans Light';
+}
+
+.verifMessage {
+  padding: 50px 100px 100px 100px;
+  width: 1300px;
+  height: 800px;
+  color: white;
+  line-height: 30px;
+
+}
+
+.no-overflow {
+  overflow: hidden;
+}
+
+.registerButton {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  display: flex;
+  background-color: transparent;
+  border: 2px white solid;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 170px;
+  border-radius: 30px;
+  color: white;
+}
+
+.buttonCool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 70px;
+  border-radius: 25px;
+  font-size:20px;
+  background-color: white;
+  color: black;
+  color: linear-gradient(360deg, var(#764BA2), var(#84B067));
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.padding-in {
+  padding: 10px 80px 80px 80px;
+}
+
+.userData {
+  margin-top: 100px;
+  margin-bottom: 80px;
+}
+
+
+.input-underline {
+  border: none;  
+  border-bottom: 2px solid white; 
+  outline: none;       
+  background: transparent;
+  padding: 8px 4px;
+  font-size: 16px;
+  width: 800px;
+  margin-bottom: 50px;
+}
+
+
+p {
+  font-family: 'Jakarta Sans Light';
+  font-size: 20px;
+}
+
+.loginButton {
+  position: absolute;
+  top: 50px;
+  padding-top:3px;
+  right: 50px;
+  display: flex;
+  background-color: transparent;
+  border: 2px white solid;
+  align-items: center;
+  justify-content: center;
+  height: 75px;
+  width: 160px;
+  border-radius: 30px;
+  color: white;
+}
+
+/* global css variable */
+:root {
+  --color-bg1: black;
+  --color1: 107, 163, 193;
+  --color2: 132, 176, 103;
+  --color3: 85, 125, 255;
+  --color4: 35, 0, 77;
+  --color5: 236, 64, 64;
+  --color-interactive: 148, 100, 255;
+  --circle-size: 2000px;
+  --blending: hard-light;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  50% {
+    transform: translateY(50%);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+
+h1 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.gradient-bg {
+  position: fixed;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-bg1);
+  top: 0;
+  left: 0;
+
+  svg {
+    display: none;
+  }
+
+  .gradients-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+
+  .g1 {
+    z-index: -5;
+    mix-blend-mode: var(--blending);
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    opacity: 1;
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+
+  }
+
+  .g2 {
+    z-index: -5;
+    mix-blend-mode: var(--blending);
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    opacity: 1;
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveHorizontal 30s ease infinite;
+  }
+
+  .g3 {
+    z-index: -5;
+    mix-blend-mode: var(--blending);
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    opacity: 1;
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+
+    transform-origin: center center;
+    animation: moveInCircle 30s ease infinite;
+  }
+
+  .g4 {
+    z-index: -5;
+    mix-blend-mode: var(--blending);
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    opacity: 1;
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveHorizontal 30s ease infinite;
+  }
+
+  .g5 {
+    z-index: -5;
+    mix-blend-mode: var(--blending);
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    opacity: 1;
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveInCircle 30s ease infinite;
+  }
