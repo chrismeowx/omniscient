@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 backend/shap_e_model_cache/
 backend/bobot.safetensors
+backend/*.json
+.env
