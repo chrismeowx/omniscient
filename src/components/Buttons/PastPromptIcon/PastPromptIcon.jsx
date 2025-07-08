@@ -1,5 +1,5 @@
 import React from 'react'
-import folder from '/Users/angel/omniscient/src/assets/images/folder.png'
+import folder from '../../../assets/images/folder.png'
 import './PastPromptIcon.scss'
 import { useNavigate } from "react-router-dom";
 

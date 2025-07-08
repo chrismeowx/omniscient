@@ -1,5 +1,5 @@
 import React from 'react'
-import pastQuiz from '/Users/angel/omniscient/src/assets/images/pastQuiz.png'
+import pastQuiz from "../../../assets/images/pastQuiz.png"
 import './PastQuiz.scss'
 import { useNavigate } from "react-router-dom";
 
