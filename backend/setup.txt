@@ -1,10 +1,17 @@
++ Jangan lupa install python 3.12, disini pake py launcher
+
++ BIKIN VENV + START VENV
 cd backend
 py -3.12 -m venv venv
 venv\Scripts\activate.bat
 
++ INSTALL REQUIREMENTS PYTHON
+pip install -r requirements.txt
+
++ INSTALL REQUIREMENTS SHAP-E
 cd shap-e-main
 pip install -e .
-
 cd ..
-pip install -r requirements.txt
+
++ RUN
 python main.py
