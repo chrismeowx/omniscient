@@ -51,7 +51,7 @@ export default function ExplanationBox({ explanation, renderUrl }) {
 
       {renderUrl && (
         <div className="render-section">
-          <img src={renderUrl} alt="Generated 3D" style={{ maxWidth: "600px" }} />
+          <img src={renderUrl} alt="Generated 3D" style={{ maxWidth: "480px" }} />
         </div>
       )}
 
