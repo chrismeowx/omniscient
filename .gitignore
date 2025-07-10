@@ -23,6 +23,8 @@ backend/*.json
 *.njsproj
 *.sln
 *.sw?
+backend/venv/
+backend/shap_e_model/
 backend/shap_e_model_cache/
 backend/bobot.safetensors
 backend/*.json
