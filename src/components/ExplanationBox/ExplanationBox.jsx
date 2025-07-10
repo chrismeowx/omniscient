@@ -14,7 +14,7 @@ export default function ExplanationBox({ explanation, renderUrl }) {
     return (
       <div className="explanation">
         <div className="header">
-          <h1>Visualization</h1>
+          <h1>Explanation</h1>
         </div>
         <p>No explanation yet.</p>
       </div>
@@ -38,7 +38,7 @@ export default function ExplanationBox({ explanation, renderUrl }) {
   return (
     <div className="explanation">
       <div className="header">
-        <h1>Visualization</h1>
+        <h1>Explanation</h1>
       </div>
 
       {/* <div className="render-section">

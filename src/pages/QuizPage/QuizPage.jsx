@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import NorthWrapper from '../../components/NorthWrapper/NorthWrapper.jsx'
-import './QuizPage.scss'
+import React, { useState, useEffect } from "react";
+import NorthWrapper from "../../components/NorthWrapper/NorthWrapper.jsx";
+import "./QuizPage.scss";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../../firebase'
-import SpecialButton from '../../components/Buttons/SpecialButton/SpecialButton.jsx'
-import { useNavigate } from "react-router-dom"
+import { db } from "../../firebase";
+import SpecialButton from "../../components/Buttons/SpecialButton/SpecialButton.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function QuizPage() {
   const navigate = useNavigate();
   const [prompts, setPrompts] = useState([]);
   const [selected, setSelected] = useState({
     prompts: [],
-    formats: []
+    formats: [],
   });
 
   const format = [
@@ -22,9 +22,9 @@ export default function QuizPage() {
   useEffect(() => {
     const fetch = async () => {
       const pastQuery = await getDocs(collection(db, "prompts"));
-      const data = pastQuery.docs.map(doc => ({
+      const data = pastQuery.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       }));
       setPrompts(data);
     };
@@ -33,23 +33,23 @@ export default function QuizPage() {
   }, []);
 
   const handlePromptClick = (promptObj) => {
-    setSelected(prev => {
-      const exists = prev.prompts.find(p => p.id === promptObj.id);
+    setSelected((prev) => {
+      const exists = prev.prompts.find((p) => p.id === promptObj.id);
       return {
         ...prev,
         prompts: exists
-          ? prev.prompts.filter(p => p.id !== promptObj.id)
-          : [...prev.prompts, promptObj]
+          ? prev.prompts.filter((p) => p.id !== promptObj.id)
+          : [...prev.prompts, promptObj],
       };
     });
   };
 
   const handleFormatClick = (id) => {
-    setSelected(prev => ({
+    setSelected((prev) => ({
       ...prev,
       formats: prev.formats.includes(id)
-        ? prev.formats.filter(i => i !== id)
-        : [...prev.formats, id]
+        ? prev.formats.filter((i) => i !== id)
+        : [...prev.formats, id],
     }));
   };
 
@@ -59,10 +59,10 @@ export default function QuizPage() {
     }
 
     const selectedFormatId = selected.formats[0];
-    const selectedFormat = format.find(f => f.id === selectedFormatId);
-    const combinedPrompt = selected.prompts.map(p => p.prompt).join("\n");
+    const selectedFormat = format.find((f) => f.id === selectedFormatId);
+    const combinedPrompt = selected.prompts.map((p) => p.prompt).join("\n");
 
-    alert("Please wait a bit.")
+    alert("Please wait a bit.");
     console.log("SENDING PROMPT:", combinedPrompt);
     console.log("SENDING FORMAT:", selectedFormat.value);
 
@@ -71,7 +71,7 @@ export default function QuizPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         prompt: combinedPrompt,
-        format: selectedFormat.value
+        format: selectedFormat.value,
       }),
     });
 
@@ -82,7 +82,32 @@ export default function QuizPage() {
     navigate("/GeneratedQuiz", { state: { quiz: data.quiz } });
   };
 
+  const handleDummyQuiz = () => {
+    const dummyQuiz = [
+      {
+        question: "What is the capital of France?",
+        options: ["A. Paris", "B. Berlin", "C. Madrid", "D. Rome"],
+        answer: "A. Paris",
+        explanation: "Paris is the capital and most populous city of France.",
+      },
+      {
+        question: "Explain the significance of photosynthesis.",
+        answer:
+          "Photosynthesis is the process by which green plants convert sunlight into energy.",
+        explanation:
+          "It is essential for plant growth and produces oxygen vital for most life forms.",
+      },
+      {
+        question: "Which number is prime?",
+        options: ["A. 4", "B. 6", "C. 7", "D. 8"],
+        answer: "C. 7",
+        explanation:
+          "7 is a prime number because it has only two divisors: 1 and itself.",
+      },
+    ];
 
+    navigate("/GeneratedQuiz", { state: { quiz: dummyQuiz } });
+  };
 
   return (
     <div>
@@ -96,10 +121,12 @@ export default function QuizPage() {
       </div>
 
       <div className="prompt-list">
-        {prompts.map(p => (
+        {prompts.map((p) => (
           <button
             key={p.id}
-            className={`see-past-quiz ${selected.prompts.some(sel => sel.id === p.id) ? 'clicked' : ''}`}
+            className={`see-past-quiz ${
+              selected.prompts.some((sel) => sel.id === p.id) ? "clicked" : ""
+            }`}
             onClick={() => handlePromptClick(p)}
           >
             {p.prompt}
@@ -110,10 +137,12 @@ export default function QuizPage() {
       <div className="question-format">
         <h1>Question Format</h1>
         <div className="placeholder">
-          {format.map(f => (
+          {format.map((f) => (
             <button
               key={f.id}
-              className={`see-past-quiz ${selected.formats.includes(f.id) ? 'clicked' : ''}`}
+              className={`see-past-quiz ${
+                selected.formats.includes(f.id) ? "clicked" : ""
+              }`}
               onClick={() => handleFormatClick(f.id)}
             >
               {f.qformat}
@@ -121,7 +150,7 @@ export default function QuizPage() {
           ))}
         </div>
       </div>
-      <SpecialButton onClick={goToGeneratedQuiz} text={"Generate"}/>
+      <SpecialButton onClick={handleDummyQuiz} text={"Generate"} />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import NorthWrapper from "../../components/NorthWrapper/NorthWrapper";
-import './GeneratedQuiz.scss';
-import arrowPrev from '../../assets/images/arrowPrevious.png';
-import arrowNext from '../../assets/images/arrowNext.png';
-import arrowUp from '../../assets/images/arrowUp.png';
+import "./GeneratedQuiz.scss";
+import arrowPrev from "../../assets/images/arrowPrevious.png";
+import arrowNext from "../../assets/images/arrowNext.png";
+import arrowUp from "../../assets/images/arrowUp.png";
 import ExplanationBox from "../../components/ExplanationBox/ExplanationBox";
 
 export default function GeneratedQuiz() {
@@ -25,17 +25,16 @@ export default function GeneratedQuiz() {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    const isRight = option.trim().charAt(0).toUpperCase() === current.answer.trim().charAt(0).toUpperCase();
+    const isRight =
+      option.trim().charAt(0).toUpperCase() ===
+      current.answer.trim().charAt(0).toUpperCase();
     setIsCorrect(isRight);
 
     const explain = isRight
       ? `Benar! ${option} adalah jawaban yang tepat.`
       : `Salah. Jawaban benar adalah ${current.answer}.`;
 
-    setExplanations([
-        { body: explain },
-        { body: current.explanation } 
-    ]);
+    setExplanations([{ body: explain }, { body: current.explanation }]);
   };
 
   const handlePrev = () => {
@@ -64,29 +63,50 @@ export default function GeneratedQuiz() {
   };
 
   const handleEssaySubmit = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/check-essay", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: current.question,
-          user_answer: essayAnswer,
-          correct_answer: current.answer
-        }),
-      });
+    // try {
+    //   const response = await fetch("http://localhost:5000/check-essay", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       question: current.question,
+    //       user_answer: essayAnswer,
+    //       correct_answer: current.answer,
+    //     }),
+    //   });
 
-      if (!response.ok) throw new Error("Failed to check essay.");
+    //   if (!response.ok) throw new Error("Failed to check essay.");
 
-      const data = await response.json();
-      setExplanations([{ body: data.feedback }]);
-    } catch (err) {
-      console.error(err);
-      setExplanations([{ body: "Error checking essay answer." }]);
+    //   const data = await response.json();
+    //   setExplanations([{ body: data.feedback }]);
+    // } catch (err) {
+    //   console.error(err);
+    //   setExplanations([{ body: "Error checking essay answer." }]);
+    // }
+
+    // Front end only
+    const correct = current.answer.toLowerCase().trim();
+    const user = essayAnswer.toLowerCase().trim();
+
+    const keywords = correct.split(" ").filter((word) => word.length > 3);
+
+    const matchedKeywords = keywords.filter((keyword) =>
+      user.includes(keyword)
+    );
+    const matchRatio = matchedKeywords.length / keywords.length;
+
+    let feedback = "";
+
+    if (matchRatio > 0.6) {
+      feedback = `Jawaban kamu cukup baik. Kamu menyebutkan ${matchedKeywords.length} dari ${keywords.length} kata penting.`;
+    } else {
+      feedback = `Jawaban belum sesuai. Coba tambahkan poin seperti: "${current.answer}"`;
     }
+
+    setExplanations([{ body: feedback }]);
   };
 
   return (
-    <div>
+    <div className="gradient-bg">
       <NorthWrapper />
       <div className="g1"></div>
       <div className="g2"></div>
@@ -104,7 +124,13 @@ export default function GeneratedQuiz() {
               {current.options.map((opt, i) => (
                 <button
                   key={i}
-                  className={`option-btn ${selectedOption === opt ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+                  className={`option-btn ${
+                    selectedOption === opt
+                      ? isCorrect
+                        ? "correct"
+                        : "incorrect"
+                      : ""
+                  }`}
                   onClick={() => handleOptionClick(opt)}
                   disabled={selectedOption !== null}
                 >
@@ -131,21 +157,28 @@ export default function GeneratedQuiz() {
           </div>
         )}
 
-
         <br />
         <div className="np-buttons">
-          <button className="arrow-button" onClick={handlePrev} disabled={idx === 0}>
+          <button
+            className="arrow-button"
+            onClick={handlePrev}
+            disabled={idx === 0}
+          >
             <img className="imgg" src={arrowPrev} alt="Previous" />
           </button>
-          <p>{idx + 1} of {quiz.length}</p>
-          <button className="arrow-button" onClick={handleNext} disabled={idx === quiz.length - 1}>
+          <p>
+            {idx + 1} of {quiz.length}
+          </p>
+          <button
+            className="arrow-button"
+            onClick={handleNext}
+            disabled={idx === quiz.length - 1}
+          >
             <img className="imgg" src={arrowNext} alt="Next" />
           </button>
         </div>
       </div>
-        {explanations.length > 0 && (
-          <ExplanationBox explanation={explanations} />
-        )}
+      {explanations.length > 0 && <ExplanationBox explanation={explanations} />}
     </div>
   );
 }
