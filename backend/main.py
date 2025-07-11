@@ -2,13 +2,13 @@ from flask import Flask
 from flask_cors import CORS
 from firebase_admin import credentials, firestore, initialize_app
 from routes.explanation import explanation_bp
-from routes.quiz import quiz_bp
 from routes.generate import generate_bp
+from routes.quiz import quiz_bp
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-cred = credentials.Certificate("./todolist-6deff-firebase-adminsdk-fbsvc-7a3f7ec41f.json")
+cred = credentials.Certificate("")
 firebase_app = initialize_app(cred)
 db = firestore.client()
 

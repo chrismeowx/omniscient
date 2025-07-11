@@ -6,7 +6,7 @@ import NorthWrapper from '../../components/NorthWrapper/NorthWrapper.jsx'
 import ExplanationBox from '../../components/ExplanationBox/ExplanationBox.jsx'
 
 export default function GeneratePage() {
-  const [explanation, setExplanation] = useState([]);
+  const [explanation, setExplanation] = useState([])
   const [renderUrl, setRenderUrl] = useState("");
 
   return (
@@ -17,7 +17,7 @@ export default function GeneratePage() {
       <PromptInput setExplanation={setExplanation} setRenderUrl={setRenderUrl}/>
       {explanation.length > 0 && (
         <ExplanationBox explanation={explanation} renderUrl={renderUrl} />
-      )}
+      )} 
     </div>
   )
 }

@@ -62,7 +62,7 @@ export default function QuizPage() {
     const selectedFormat = format.find(f => f.id === selectedFormatId);
     const combinedPrompt = selected.prompts.map(p => p.prompt).join("\n");
 
-    alert("Please wait a bit.")
+    // alert("Please wait a bit.")
     console.log("SENDING PROMPT:", combinedPrompt);
     console.log("SENDING FORMAT:", selectedFormat.value);
 

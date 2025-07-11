@@ -5,7 +5,7 @@ import re
 with open("config.json", "r") as f:
     config = json.load(f)
 
-value = re.sub(r"\s+", "", config["LLAMA2_API_KEY"])
+value = re.sub(r"\s+", "", config["OPENROUTER_API_KEY"])
 if not value:
     raise ValueError("Error, API not found.")
 

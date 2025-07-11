@@ -1,12 +1,22 @@
 from flask import Blueprint, request, jsonify, current_app
-from services.llama_client import client
-import re, json
+from openai import OpenAI  # SDK OpenAI tetap bisa dipakai
+import json, re
 
 explanation_bp = Blueprint('explanation_bp', __name__)
 
+with open("config.json") as f:
+    config = json.load(f)
+
+api_key = config.get("OPENROUTER_API_KEY")
+
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://openrouter.ai/api/v1"  
+)
+
 @explanation_bp.route("/ask", methods=["POST"])
 def ask():
-    db = current_app.config["DB"]  
+    db = current_app.config["DB"]
     data = request.get_json()
     prompt = data["prompt"]
 
@@ -15,11 +25,10 @@ def ask():
         "Format jawab: JSON array. "
         "Setiap item: {\"title\": \"Judul\", \"body\": \"Penjelasan\"}. "
         "Hanya balas JSON array saja, TANPA penjelasan tambahan."
-        "Jangan pakai "
     )
 
     completion = client.chat.completions.create(
-        model="meta-llama/llama-3.3-70b-instruct:free",
+        model="meta-llama/llama-4-scout:free",
         messages=[
             {"role": "system", "content": instruction},
             {"role": "user", "content": prompt}

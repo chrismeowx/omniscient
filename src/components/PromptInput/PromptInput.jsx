@@ -24,24 +24,24 @@ export default function PromptInput({ setExplanation, setRenderUrl }) {
 
       const explainData = await explainResponse.json();
       console.log("Explain:", explainData);
-      
-      // console.log("Please wait a bit.")
-      // const generateResponse = await fetch("http://localhost:5000/generate", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ prompt }),
-      // });
 
-      // if (!generateResponse.ok) {
-      //   const text = await generateResponse.text();
-      //   throw new Error("Generate API Error: " + text);
-      // }
+      const generateResponse = await fetch("http://localhost:5000/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
 
-      // const generateData = await generateResponse.json();
-      // console.log("Generate:", generateData);
+      if (!generateResponse.ok) {
+        const text = await generateResponse.text();
+        throw new Error("Generate API Error: " + text);
+      }
+
+      const generateData = await generateResponse.json();
+      console.log("Generate:", generateData);
 
       setExplanation(explainData.result); 
-      // setRenderUrl(`http://localhost:5000${generateData.render_url}`);
+      console.log("Final Render URL:", generateData.render_url);
+      setRenderUrl(generateData.render_url);
 
       setPrompt("");
     } catch (error) {

@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import './ExplanationBox.scss'
 import arrowPrev from '../../assets/images/arrowPrevious.png'
 import arrowNext from '../../assets/images/arrowNext.png'
-import neutron from '../../assets/images/neutron.png'
-import proton from '../../assets/images/proton.png'
-import electron from '../../assets/images/electron.png'
 
 export default function ExplanationBox({ explanation, renderUrl }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [neutron, proton, electron];
+
+  console.log("Render URL:", renderUrl);
+
 
   if (!explanation || explanation.length === 0) {
     return (
@@ -41,17 +40,9 @@ export default function ExplanationBox({ explanation, renderUrl }) {
         <h1>Visualization</h1>
       </div>
 
-      {/* <div className="render-section">
-        <img
-          src={images[currentIndex % images.length]}
-          alt={`Visual ${currentIndex + 1}`}
-          style={{ maxWidth: '600px' }}
-        />
-      </div> */}
-
       {renderUrl && (
         <div className="render-section">
-          <img src={renderUrl} alt="Generated 3D" style={{ maxWidth: "600px" }} />
+          <img src={renderUrl} alt="Generated 3D" style={{ maxWidth: "400px" }} />
         </div>
       )}
 

@@ -4,7 +4,7 @@ from firebase_admin import credentials, firestore, initialize_app
 from routes.explanation import explanation_bp
 from routes.quiz import quiz_bp
 
-cred = credentials.Certificate("./todolist-6deff-firebase-adminsdk-fbsvc-6f701a5e4f.json")
+cred = credentials.Certificate("")
 initialize_app(cred)
 
 app = Flask(__name__)
